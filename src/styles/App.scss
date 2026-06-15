@@ -44,7 +44,18 @@
     margin-top: $spacer0;
     border: $devBorder solid blue;
     width: 100%;
+    position: relative;
   }
+  @media (max-width: 600px) {
+    min-height: 100vh;
+    height: auto;
+    overflow: auto;
+
+    main {
+      flex-direction: column-reverse;
+    }
+  }
+
   #displayContact a {
     font-weight: 300;
     text-decoration: none;

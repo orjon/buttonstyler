@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion, AccordionItem } from 'react-light-accordion';
 import AdjustmentSelector from './AdjustmentSelector';
 import AdjustmentSize from './AdjustmentSize';
@@ -13,10 +13,19 @@ import AdjustmentCorners from './AdjustmentCorners';
 import '../styles/Adjustments.scss';
 
 const Adjustments = () => {
+  const query = window.matchMedia('(max-width: 600px)');
+  const [isNarrow, setIsNarrow] = useState(query.matches);
+
+  useEffect(() => {
+    const handler = (e) => setIsNarrow(e.matches);
+    query.addEventListener('change', handler);
+    return () => query.removeEventListener('change', handler);
+  }, []);
+
   return (
     <div className='Adjustments'>
       <div className='windowTitle'>Adjustments</div>
-      <Accordion atomic={true}>
+      <Accordion atomic={isNarrow}>
         <AccordionItem className='active' title='Size'>
           <AdjustmentSize />
         </AccordionItem>

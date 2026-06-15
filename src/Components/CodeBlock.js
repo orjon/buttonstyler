@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import getCSSText from '../helpers/getCSSText';
 import '../styles/CodeBlock.scss';
 
 const CodeBlock = ({ buttonStyle }) => {
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setCopied(false);
+  }, [buttonStyle]);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(getCSSText(buttonStyle));
+    setCopied(true);
+  };
+
   const {
     height,
     width,
@@ -75,6 +88,10 @@ const CodeBlock = ({ buttonStyle }) => {
     <div className='CodeBlock'>
       <div className='windowTitle'>CSS</div>
       <div className='codeContainer'>
+        <button className={`copyButton${copied ? ' copied' : ''}`} onClick={handleCopy}>
+          <ContentCopyIcon fontSize='inherit' />
+          {copied ? 'Copied' : 'Copy'}
+        </button>
         <div className='CSSCode'>
           <div>
             <span className='name'>button </span>

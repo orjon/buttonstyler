@@ -7,6 +7,11 @@
   border: $devBorder solid blue;
   width: 350px;
   height: 100%;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    height: auto;
+  }
   text-align: center;
 
   .adjustSection {

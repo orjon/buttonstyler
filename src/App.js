@@ -23,8 +23,8 @@ const App = () => {
         </main>
         <footer>
           <CodeBlock />
+          <Footer />
         </footer>
-        <Footer />
       </div>
     </Provider>
   );
